@@ -2,7 +2,7 @@
   <img src="images/banner.png" alt="Banner Nous Library App" width="100%">
 </p>
 
-<h1 align="center">Nous Library App</h1>
+<h1 align="center">🏛️ Nous Library App 📖</h1>
 
 <p align="center">
   <em>"A biblioteca como o ato sereno de contemplar a essência"</em>
@@ -85,13 +85,13 @@ Para refletir o conceito de "Nous", a identidade visual é sóbria, acadêmica e
 
 | Cor | Hex | Uso |
 | :--- | :--- | :--- |
-| 🔵 **Azul Egeu** | `#2B3A67` <img src="https://via.placeholder.com/15/2B3A67/000000?text=+" alt="Azul Egeu"> | Cor primária (ações, links, títulos) |
-| ⚪ **Mármore** | `#F5F5F3` <img src="https://via.placeholder.com/15/F5F5F3/000000?text=+" alt="Mármore"> | Fundo principal da aplicação |
-| ⚫ **Pedra Escura** | `#333333` <img src="https://via.placeholder.com/15/333333/000000?text=+" alt="Pedra Escura"> | Texto principal (corpo) |
-| 🔘 **Pedra Clara** | `#E0E0E0` <img src="https://via.placeholder.com/15/E0E0E0/000000?text=+" alt="Pedra Clara"> | Divisores, bordas, fundos secundários |
-| 🟡 **Ouro Antigo** | `#B8860B` <img src="https://via.placeholder.com/15/B8860B/000000?text=+" alt="Ouro Antigo"> | Destaques sutis, ícones especiais |
-| 🟢 **Oliva** | `#6B8E23` <img src="https://via.placeholder.com/15/6B8E23/000000?text=+" alt="Oliva"> | Mensagens de sucesso |
-| 🔴 **Terracota** | `#B24C42` <img src="https://via.placeholder.com/15/B24C42/000000?text=+" alt="Terracota"> | Mensagens de erro e alerta (atrasos) |
+| 🔵 **Azul Egeu** | `#2B3A67` | Cor primária (ações, links, títulos) |
+| ⚪ **Mármore** | `#F5F5F3` | Fundo principal da aplicação |
+| ⚫ **Pedra Escura** | `#333333` | Texto principal (corpo) |
+| 🔘 **Pedra Clara** | `#E0E0E0` | Divisores, bordas, fundos secundários |
+| 🟡 **Ouro Antigo** | `#B8860B` | Destaques sutis, ícones especiais |
+| 🟢 **Oliva** | `#6B8E23` | Mensagens de sucesso |
+| 🔴 **Terracota** | `#B24C42` | Mensagens de erro e alerta (atrasos) |
 
 ### Tipografia
 
@@ -306,11 +306,3 @@ O App estará rodando em:
 ## 📄 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-```
-
----
-
-✅ **Pronto para uso:** basta copiar e colar no seu `README.md`.  
-O layout, os ícones, a tabela de cores e os badges funcionam perfeitamente no GitHub.
-```
