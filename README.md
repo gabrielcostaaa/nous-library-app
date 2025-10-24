@@ -122,61 +122,61 @@ O projeto segue os princípios de **Código Limpo**, **Modularidade** e **Separa
 ### Banco de Dados (Prisma Schema)
 
 ```prisma
-// prisma/schema.prisma
-
-generator client {
-  provider = "prisma-client-js"
-}
-
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
-// Enum para os papéis de usuário
 enum Role {
-  ADMIN // Administrador
-  USER  // Usuário comum (para empréstimos)
+  ADMIN
+  USER
+}
+
+enum LoanStatus {
+  ACTIVE
+  OVERDUE
+  RETURNED
 }
 
 model User {
-  id       String   @id @default(uuid())
-  email    String   @unique
-  password String
-  name     String
-  role     Role     @default(USER)
-  loans    Loan[]
+  id        String   @id @default(uuid()) @map("usr_id")
+  name      String   @map("usr_name")
+  email     String   @unique @map("usr_email")
+  password  String   @map("usr_password")
+  role      Role     @default(USER) @map("usr_role")
+  createdAt DateTime @default(now()) @map("usr_created_at")
+  updatedAt DateTime @updatedAt @map("usr_updated_at")
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  loans Loan[]
+
+  @@map("users")
 }
 
 model Book {
-  id        String   @id @default(uuid())
-  title     String
-  author    String
-  basePrice Float
-  loans     Loan[]
+  id        String   @id @default(uuid()) @map("bok_id")
+  title     String   @map("bok_title")
+  author    String   @map("bok_author")
+  basePrice Float    @map("bok_base_price")
+  createdAt DateTime @default(now()) @map("bok_created_at")
+  updatedAt DateTime @updatedAt @map("bok_updated_at")
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  loans Loan[]
+
+  @@map("books")
 }
 
 model Loan {
-  id         String    @id @default(uuid())
-  loanDate   DateTime  @default(now())
-  dueDate    DateTime
-  returnDate DateTime?
+  id                  String     @id @default(uuid()) @map("lon_id")
+  userId              String     @map("lon_usr_id")
+  bookId              String     @map("lon_bok_id")
+  loanDate            DateTime   @default(now()) @map("lon_loan_date")
+  dueDate             DateTime   @map("lon_due_date")
+  returnDate          DateTime?  @map("lon_return_date")
+  status              LoanStatus @default(ACTIVE) @map("lon_status")
+  fineDiscountApplied Boolean    @default(false) @map("lon_fine_discount_applied")
 
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
-  book   Book   @relation(fields: [bookId], references: [id])
-  bookId String
+  createdAt DateTime @default(now()) @map("lon_created_at")
+  updatedAt DateTime @updatedAt @map("lon_updated_at")
 
-  fineDiscountApplied Boolean @default(false)
+  user User @relation(fields: [userId], references: [id])
+  book Book @relation(fields: [bookId], references: [id])
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  @@map("loans")
 }
 ````
 
