@@ -1,0 +1,42 @@
+# Stage 1: Build da Aplicação
+FROM node:20-alpine AS builder
+
+WORKDIR /usr/src/app
+
+# Copia arquivos de dependência da raiz e da API
+COPY package.json yarn.lock ./
+COPY packages/api/package.json ./packages/api/
+
+# Instala TODAS as dependências do monorepo (Yarn Workspaces faz isso)
+# --frozen-lockfile garante que as versões do yarn.lock sejam usadas
+RUN yarn install --frozen-lockfile
+
+# Copia o código fonte da API
+COPY packages/api ./packages/api
+# Se houver pacotes compartilhados (ex: eslint-config), copie-os também
+# COPY packages/eslint-config-nous ./packages/eslint-config-nous
+
+# Executa o build de produção da API (usando o script da raiz)
+RUN yarn build:api
+
+# Stage 2: Imagem Final de Produção
+FROM node:20-alpine
+
+WORKDIR /usr/src/app
+
+# Copia arquivos de dependência da raiz e da API novamente
+COPY package.json yarn.lock ./
+COPY packages/api/package.json ./packages/api/
+
+# Instala SOMENTE as dependências de produção
+RUN yarn install --production --frozen-lockfile
+
+# Copia os artefatos de build do stage anterior
+COPY --from=builder /usr/src/app/packages/api/dist ./packages/api/dist
+
+# Expõe a porta que a API vai rodar dentro do container
+EXPOSE 3000
+
+# Comando para iniciar a API em produção
+# Usará o 'dist/main.js' gerado pelo build
+CMD ["node", "packages/api/dist/main.js"]

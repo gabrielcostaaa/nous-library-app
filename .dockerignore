@@ -1,0 +1,29 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Node
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build artifacts
+packages/api/dist
+packages/web/dist
+
+# Docker
+Dockerfile*
+docker-compose.yml
+nginx.conf
+
+# Environment
+.env
+
+# Banco de dados local (se mapeado)
+postgres-data
+
+# Arquivos do S.O.
+.DS_Store
+Thumbs.db

@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  # Serviço do Banco de Dados PostgreSQL
+  db:
+    image: postgres:15-alpine # Use uma imagem leve
+    container_name: nous_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER} # Pega do .env
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} # Pega do .env
+      POSTGRES_DB: ${POSTGRES_DB} # Pega do .env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data # Volume nomeado para persistência
+    ports:
+      - "5432:5432"
+
+  # Serviço da API Backend (NestJS)
+  api:
+    container_name: nous_api
+    build:
+      context: . # Contexto é a raiz do monorepo
+      dockerfile: Dockerfile.api # Usa o Dockerfile que criamos
+    restart: always
+    depends_on:
+      - db # Espera o banco de dados estar pronto (basicamente)
+    environment:
+      DATABASE_URL: ${DATABASE_URL} # Pega do .env (já aponta para 'db:5432')
+      PORT: ${API_PORT} # Pega do .env
+    ports:
+      - "3000:3000" # Mapeia porta 3000 do host para 3000 do container
+    # Opcional: Mapear volumes para desenvolvimento com hot-reload (remova para "produção")
+    # volumes:
+    #  - ./packages/api:/usr/src/app/packages/api
+    #  - /usr/src/app/node_modules # Não mapeia node_modules local
+
+  # Serviço do Frontend Web (React/Vite servido por Nginx)
+  web:
+    container_name: nous_web
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+      args:
+        # Passa a URL da API como argumento para o build do Vite
+        VITE_API_URL: ${VITE_API_URL} # Pega do .env (http://api:3000)
+    restart: always
+    ports:
+      - "8080:80" # Mapeia porta 8080 do host para 80 do Nginx no container
+    # Não precisa de depends_on: api, pois são assets estáticos.
+    # O browser do usuário que fará as chamadas para a API (que está em localhost:3000)
+
+volumes:
+  postgres-data: # Define o volume nomeado para o banco de dados
