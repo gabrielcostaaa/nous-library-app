@@ -12,9 +12,10 @@
   <img alt="Status do Projeto" src="https://img.shields.io/badge/status-em_desenvolvimento-yellow">
   <img alt="Linguagem Principal" src="https://img.shields.io/badge/typescript-%233178C6.svg?style=flat&logo=typescript&logoColor=white">
   <img alt="Framework Backend" src="https://img.shields.io/badge/nestjs-%23E0234E.svg?style=flat&logo=nestjs&logoColor=white">
-  <img alt="Framework Frontend" src="https://img.shields.io/badge/next.js-000000?style=flat&logo=nextdotjs&logoColor=white">
+  <img alt="Framework Frontend" src="https://img.shields.io/badge/react-%2361DAFB.svg?style=flat&logo=react&logoColor=white">
   <img alt="Licença" src="https://img.shields.io/badge/license-MIT-blue">
 </p>
+
 
 ## 📋 Índice
 
