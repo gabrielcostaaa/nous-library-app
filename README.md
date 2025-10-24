@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="img/banner.png" alt="Banner Nous Library App" width="100%">
+  <img src="images/banner.png" alt="Banner Nous Library App" width="100%">
 </p>
 
 <h1 align="center">Nous Library App</h1>
