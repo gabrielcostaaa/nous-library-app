@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -14,9 +13,9 @@ enum Role {
 }
 
 enum LoanStatus {
-  ACTIVE // Emprestado, dentro do prazo
-  OVERDUE // Atrasado
-  RETURNED // Devolvido
+  ACTIVE
+  OVERDUE
+  RETURNED
 }
 
 model User {

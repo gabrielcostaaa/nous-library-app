@@ -15,7 +15,10 @@
     "dev:web": "yarn workspace nous-web dev",
     "build:api": "yarn workspace nous-api build",
     "build:web": "yarn workspace nous-web build",
-    "migrate:api": "dotenv -e .env -- yarn workspace nous-api prisma:migrate:dev"
+    "migrate:api": "dotenv -e .env -- yarn workspace nous-api prisma:migrate:dev",
+    "generate:api": "dotenv -e .env -- yarn workspace nous-api prisma:generate",
+    "api": "yarn workspace nous-api",
+    "web": "yarn workspace nous-web"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
