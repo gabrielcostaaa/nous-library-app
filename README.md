@@ -104,16 +104,17 @@ Para refletir o conceito de "Nous", a identidade visual é sóbria, acadêmica e
 
 | Camada | Tecnologia | Justificativa |
 | :--- | :--- | :--- |
-| **Backend** | **NestJS (Node.js)** | Framework Typescript que força uma arquitetura modular (SRP) e organizada. |
-|  | **Prisma** | ORM moderno com alta type-safety, ideal para a integração com NestJS. |
-|  | **JWT + Bcrypt** | Padrão de indústria para autenticação segura e hashing de senhas. |
-|  | `class-validator` | Validação de DTOs (Data Transfer Objects) na entrada da API. |
-| **Frontend** | **Next.js (React)** | Framework robusto para construção de interfaces, com excelente roteamento. |
-|  | **Typescript** | Garante consistência e segurança de tipos de ponta a ponta. |
-|  | **Tailwind CSS** | (Sugestão) Utilitário CSS para prototipação rápida e consistente. |
-|  | **Axios** | Cliente HTTP para comunicação segura com a API. |
-| **Banco de Dados** | **PostgreSQL** | Banco de dados relacional robusto e escalável. |
-| (Bônus) | **Redis** | (Opcional) Pode ser usado para cache ou blacklist de tokens JWT (logout). |
+| **Backend** | **NestJS (Node.js)** | Framework Typescript para arquitetura modular e organizada (SRP). |
+|  | **Prisma** | ORM moderno com alta type-safety para integração com NestJS. |
+|  | **JWT + Passport + Bcrypt** | Padrão de indústria para autenticação segura e hashing de senhas. |
+|  | **Zod** | Validação de dados em tempo de execução e inferência de tipos. |
+| **Frontend** | **Vite + React** | Ambiente de dev rápido (Vite) e biblioteca UI reativa (React). |
+|  | **Typescript** | Garante consistência e segurança de tipos no frontend. |
+|  | **shadcn/ui + Tailwind v4** | Componentes acessíveis e estilização rápida com utility-first CSS. |
+|  | **TanStack Query** | Gerenciamento de estado assíncrono (data fetching e caching). |
+|  | **React Hook Form + Zod** | Formulários performáticos com validação de schema integrada. |
+|  | **React Router** | Gerenciamento de rotas do lado do cliente (client-side routing). |
+| **Banco de Dados** | **PostgreSQL** | Banco de dados relacional robusto, confiável e escalável. |
 
 ## 🏛️ Arquitetura
 
@@ -253,56 +254,54 @@ seu-projeto/
 
 ## 🚀 Como Executar
 
-Siga os passos abaixo para executar o projeto localmente. (Assumindo duas pastas separadas: `backend` e `frontend`).
+Este guia assume que você já possui **Git**, **Docker** e **Docker Compose** instalados em sua máquina. Node.js e Yarn também são recomendados se você pretende rodar localmente fora do Docker.
 
-### Backend (API NestJS)
+**Observação:** Execute todos os comandos a partir da pasta **raiz** do projeto (`nous-library-app/`) após clonar.
 
-```bash
-git clone https://github.com/seu-usuario/nous-library-backend.git
-cd nous-library-backend
-npm install
-```
-
-Crie e configure o arquivo `.env`:
-
-```env
-DATABASE_URL="postgresql://user:password@localhost:5432/nouslibrary"
-JWT_SECRET="seu-segredo-super-secreto"
-```
-
-Rode as migrações e inicie o servidor:
+### 1. Clonar o Repositório
 
 ```bash
-npx prisma migrate dev
-npm run start:dev
+git clone https://github.com/gabrielcostaaa/nous-library-app.git
+cd nous-library-app
 ```
-
-A API estará rodando em:
-➡️ `http://localhost:3001`
-
-### Frontend (Dashboard Next.js)
-
+### 2. Instalar Dependências
+Instale todas as dependências do backend, frontend e ferramentas do monorepo.
 ```bash
-git clone https://github.com/seu-usuario/nous-library-frontend.git
-cd nous-library-frontend
-npm install
+yarn install
 ```
+### 3. Importar Variáveis de Ambiente
+Para fins de praticidade, o .env foi versionado no repositório, apesar da prática comum e segura é se utilizar o .env.example
 
-Crie o arquivo `.env.local`:
-
-```env
-NEXT_PUBLIC_API_URL="http://localhost:3001"
-```
-
-Inicie o servidor:
-
+### 4. Iniciar o Banco de Dados Docker
+Suba apenas o contêiner do banco de dados PostgreSQL.
 ```bash
-npm run dev
+docker-compose up -d db
 ```
 
-O App estará rodando em:
-➡️ `http://localhost:3000`
+### 5. Executar as Migrações do Banco
+Aplique o schema do Prisma no banco de dados Docker.
+```bash
+yarn migrate:api
+```
+(Este comando usará a DATABASE_URL definida no .env para se conectar via localhost:5432). Pode ser necessário confirmar a aplicação da migração no terminal.
+
+### 6. (Opcional) Gerar o Prisma Client
+Se você fizer alterações no prisma/schema.prisma, precisará regenerar o cliente Prisma.
+```bash
+yarn generate:api
+```
+
+###  8. Iniciar a Aplicação Completa (API + Frontend)
+Suba todos os serviços definidos no docker-compose.yml (API, Frontend Web e o Banco de Dados, se ainda não estiver rodando).
+```bash
+docker-compose up -d --build
+```
+--build: Necessário na primeira vez ou se houver alterações nos Dockerfiles.
+
+-d: Roda os contêineres em segundo plano.
+
+###  9. Acessar a Aplicação
+Abra seu navegador em ➡️ http://localhost:8080
 
 ## 📄 Licença
-
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
