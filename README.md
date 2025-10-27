@@ -30,7 +30,7 @@
 - [🏛️ Arquitetura](#-arquitetura)
   - [Banco de Dados (Prisma Schema)](#banco-de-dados-prisma-schema)
   - [Backend (Estrutura de Pastas NestJS)](#backend-estrutura-de-pastas-nestjs)
-- [🗺️ Endpoints da API](#-endpoints-da-api)
+- [🗺️ Documentação da API](#-documentacao-da-api)
 - [🚀 Como Executar](#-como-executar)
 - [📄 Licença](#-licença)
 
@@ -217,40 +217,12 @@ seu-projeto/
 └── package.json
 ```
 
-## 🗺️ Endpoints da API
+## 🗺️ Documentação da API
 
-### A. Autenticação e Usuários (Admin)
+Toda a documentação dos endpoints da API é gerada automaticamente pelo Swagger.
 
-* `POST /admin/login`
-  **Descrição:** Login do Admin. Retorna um Token JWT.
-  **Input:** `{"email": "...", "senha": "..."}`
-
-* `POST /admin/users`
-  **Descrição:** Criar novo usuário Admin.
-  **Regra:** Rota protegida (Requer JWT de Admin).
-
-### B. Usuários (Comum)
-
-* `POST /users`
-  **Descrição:** Criar usuário comum (para empréstimos).
-  **Regra:** Endpoint público.
-
-### C. Empréstimos e Cálculos
-
-* `POST /loans`
-  **Descrição:** Registrar um novo empréstimo.
-  **Input:** `{"user_id": "...", "book_id": "...", "data_prazo_devolucao": "..."}`
-  **Regra:** Rota protegida (Admin).
-
-* `GET /loans/{id}/fine`
-  **Descrição:** Calcular a multa de um empréstimo específico.
-  **Output:** `{"multa": 10.00}`
-
-* `GET /loans/{id}/rental`
-  **Descrição:** Calcular o valor total do aluguel.
-  **Output:** `{"aluguel": 15.00}`
-
-*(Nota: Endpoints de CRUD para Livros e listagem de Usuários/Empréstimos também serão implementados para suportar as telas do frontend).*
+Após iniciar o servidor do backend localmente, a documentação estará disponível em:
+`http://localhost:3000/api`
 
 ## 🚀 Como Executar
 
