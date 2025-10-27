@@ -1,9 +1,13 @@
 import { Module } from "@nestjs/common";
 import { PrismaModule } from "./prisma/prisma.module";
-import { CreateAccountController } from "./controllers/create-account.controller";
 import { AuthModule } from "./auth/auth.module";
 import { ConfigModule } from "./config/config.module";
 import { RegisterLoansController } from "./controllers/register-loans.controller";
+import { AdminCreateAccountController } from "./controllers/admin-create-account.controller";
+import { UserCreateAccountController } from "./controllers/user-create-account.controller";
+import { RegisterBooksController } from "./controllers/register-books.controller";
+import { ListBooksController } from "./controllers/list-books.controller";
+import { ListLoansController } from "./controllers/lisit-loans.controller";
 
 @Module({
   imports: [
@@ -11,6 +15,13 @@ import { RegisterLoansController } from "./controllers/register-loans.controller
     PrismaModule,
     AuthModule
   ],
-  controllers: [CreateAccountController, RegisterLoansController],
+  controllers: [
+    AdminCreateAccountController,
+    UserCreateAccountController,
+    RegisterLoansController,
+    RegisterBooksController,
+    ListBooksController,
+    ListLoansController
+  ],
 })
 export class AppModule { }

@@ -36,6 +36,8 @@ model Book {
   id        String   @id @default(uuid()) @map("bok_id")
   title     String   @map("bok_title")
   author    String   @map("bok_author")
+  genre     String?  @map("bok_genre")
+  imageUrl  String?  @map("bok_image_url")
   basePrice Float    @map("bok_base_price")
   createdAt DateTime @default(now()) @map("bok_created_at")
   updatedAt DateTime @updatedAt @map("bok_updated_at")

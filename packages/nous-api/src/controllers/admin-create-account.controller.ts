@@ -1,5 +1,7 @@
-import { Body, ConflictException, Controller, Get, HttpCode, Post, UsePipes } from "@nestjs/common";
+import { Body, ConflictException, Controller, Get, HttpCode, Post, UseGuards, UsePipes } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { hash } from "bcryptjs";
+import { AdminGuard } from "src/auth/admin.guard";
 import { ZodValidationPipe } from "src/pipes/zod-validation-pipe";
 import { PrismaService } from "src/prisma/prisma.service";
 import { z } from 'zod';
@@ -11,8 +13,9 @@ const createAccountBodySchema = z.object({
 });
 type CreateAccountBody = z.infer<typeof createAccountBodySchema>;
 
-@Controller('/nous-account')
-export class CreateAccountController {
+@Controller('/nous-admin-create-account')
+@UseGuards(AuthGuard('jwt'), AdminGuard)
+export class AdminCreateAccountController {
   constructor(private prisma: PrismaService) { }
 
   @Post()
@@ -36,6 +39,7 @@ export class CreateAccountController {
         name,
         email,
         password: hashPassword,
+        role: 'ADMIN',
       },
     });
     return account;
