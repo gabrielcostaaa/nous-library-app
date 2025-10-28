@@ -43,24 +43,39 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.147 0.004 49.25);
+  --background: oklch(0.976 0.003 98.48);
+  /* #F5F5F3 (Mármore) */
+  --foreground: oklch(0.2 0 0);
+  /* #333333 (Pedra Escura) */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.147 0.004 49.25);
+  /* Branco para Cards */
+  --card-foreground: oklch(0.2 0 0);
+  /* #333333 */
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.147 0.004 49.25);
-  --primary: oklch(0.216 0.006 56.043);
-  --primary-foreground: oklch(0.985 0.001 106.423);
-  --secondary: oklch(0.97 0.001 106.424);
-  --secondary-foreground: oklch(0.216 0.006 56.043);
-  --muted: oklch(0.97 0.001 106.424);
-  --muted-foreground: oklch(0.553 0.013 58.071);
-  --accent: oklch(0.97 0.001 106.424);
-  --accent-foreground: oklch(0.216 0.006 56.043);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.923 0.003 48.717);
-  --input: oklch(0.923 0.003 48.717);
-  --ring: oklch(0.709 0.01 56.259);
+  --popover-foreground: oklch(0.2 0 0);
+  --primary: oklch(0.316 0.05 264.44);
+  /* #2B3A67 (Azul Egeu) */
+  --primary-foreground: oklch(0.976 0.003 98.48);
+  /* #F5F5F3 */
+  --secondary: oklch(0.902 0.006 98.46);
+  /* Tom de #E0E0E0 */
+  --secondary-foreground: oklch(0.316 0.05 264.44);
+  /* #2B3A67 */
+  --muted: oklch(0.902 0.006 98.46);
+  --muted-foreground: oklch(0.44 0.033 264.44);
+  /* Tom de azul/cinza */
+  --accent: oklch(0.902 0.006 98.46);
+  --accent-foreground: oklch(0.316 0.05 264.44);
+  --destructive: oklch(0.485 0.151 24.32);
+  /* #B24C42 (Terracota) */
+  --destructive-foreground: oklch(0.976 0.003 98.48);
+  --border: oklch(0.902 0.006 98.46);
+  /* #E0E0E0 (Pedra Clara) */
+  --input: oklch(0.902 0.006 98.46);
+  --ring: oklch(0.316 0.05 264.44);
+  /* #2B3A67 */
+
+  /* Mantendo os charts default, ajuste se necessário */
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -77,6 +92,7 @@
 }
 
 .dark {
+  /* Você pode definir cores dark-mode baseadas no README se desejar */
   --background: oklch(0.147 0.004 49.25);
   --foreground: oklch(0.985 0.001 106.423);
   --card: oklch(0.216 0.006 56.043);
@@ -114,6 +130,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
