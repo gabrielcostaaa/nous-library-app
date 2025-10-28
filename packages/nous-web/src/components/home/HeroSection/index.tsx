@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden">
@@ -12,12 +14,7 @@ export function HeroSection() {
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <a
-              href="#destaques"
-              className="rounded-lg bg-primary px-5 py-3 text-sm font-medium text-primary-foreground hover:opacity-90"
-            >
-              Explorar catálogo
-            </a>
+            <Link to="/login?role=user" className="rounded-lg bg-primary px-5 py-3 text-sm font-medium text-primary-foreground hover:opacity-90">Explorar acervo</Link>
             <a
               href="/login"
               className="rounded-lg border px-5 py-3 text-sm font-medium hover:bg-muted"

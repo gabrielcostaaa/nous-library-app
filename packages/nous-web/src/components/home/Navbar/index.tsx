@@ -1,4 +1,5 @@
 import { useTheme } from "@/shared/theme/ThemeProvider";
+import { Moon, Sun } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function Navbar() {
@@ -13,16 +14,19 @@ export function Navbar() {
         </Link>
 
         <div className="hidden items-center gap-6 md:flex">
-          <Link to="/" className="text-sm hover:opacity-80">Catálogo</Link>
-          <Link to="/" className="text-sm hover:opacity-80">Empréstimos</Link>
-          <Link to="/login" className="text-sm hover:opacity-80">Admin</Link>
+          {/* Login de usuário comum */}
+          <Link to="/login?role=user" className="text-sm hover:opacity-80">Entrar</Link>
+
+          {/* Login administrativo */}
+          <Link to="/login?role=admin" className="text-sm hover:opacity-80">Painel Admin</Link>
+
           <button
             onClick={toggle}
             className="rounded-lg border px-3 py-1 text-sm hover:bg-muted"
             aria-label="Alternar tema"
             title="Alternar tema"
           >
-            {theme === "dark" ? "🌙" : "☀️"}
+            {theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
           </button>
         </div>
       </nav>
