@@ -44,7 +44,7 @@ O nome **"Nous" (νοῦς)** é um termo filosófico grego que representa a **m
 
 Este projeto busca traduzir esse conceito em uma aplicação: uma biblioteca digital que não é apenas um repositório de informações, mas uma ferramenta intuitiva que traz ordem e clareza à gestão do conhecimento.
 
-* **Inspiração Visual:** [Social Sciences Library (Behance)](https://www.behance.net/gallery/236204235/Social-Sciences-Library-Mobile-App-Book-Rental)
+* **Inspiração Visual (Front Mobile):** [Social Sciences Library (Behance)](https://www.behance.net/gallery/236204235/Social-Sciences-Library-Mobile-App-Book-Rental)
 
 ### O Sistema
 
@@ -115,6 +115,7 @@ Para refletir o conceito de "Nous", a identidade visual é sóbria, acadêmica e
 |  | **React Hook Form + Zod** | Formulários performáticos com validação de schema integrada. |
 |  | **React Router** | Gerenciamento de rotas do lado do cliente (client-side routing). |
 | **Banco de Dados** | **PostgreSQL** | Banco de dados relacional robusto, confiável e escalável. |
+| **Documentação** | **Swagger (OpenAPI)** | Ferramenta interativa para documentação e teste de endpoints |
 
 ## 🏛️ Arquitetura
 
@@ -261,6 +262,27 @@ yarn migrate:api
 Se você fizer alterações no prisma/schema.prisma, precisará regenerar o cliente Prisma.
 ```bash
 yarn generate:api
+```
+
+### 7. Rodando o Projeto Localmente
+Você pode iniciar os serviços de front-end e back-end juntos ou separadamente.
+
+#### Aplicação Completa (Front-end e API)
+Para rodar tanto o servidor da API quanto a aplicação web simultaneamente:
+```bash
+yarn dev
+```
+
+#### Somente o Front-end (Web)
+Para rodar apenas a interface web:
+```bash
+yarn dev:web
+```
+
+#### Somente a API (Back-end)
+Para rodar a API localmente e testar os endpoints:
+```bash
+yarn dev:api
 ```
 
 ###  8. Iniciar a Aplicação Completa (API + Frontend)
