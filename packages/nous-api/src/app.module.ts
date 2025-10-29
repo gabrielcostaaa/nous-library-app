@@ -8,11 +8,14 @@ import { UserCreateAccountController } from "./controllers/user-create-account.c
 import { RegisterBooksController } from "./controllers/register-books.controller";
 import { ListBooksController } from "./controllers/list-books.controller";
 import { ListLoansController } from "./controllers/lisit-loans.controller";
+import { FilesLocalModule } from "./files/files-local.module";
+import { DeleteBookController } from "./controllers/delete-books.controller";
 
 @Module({
   imports: [
     ConfigModule,
     PrismaModule,
+    FilesLocalModule,
     AuthModule
   ],
   controllers: [
@@ -21,7 +24,8 @@ import { ListLoansController } from "./controllers/lisit-loans.controller";
     RegisterLoansController,
     RegisterBooksController,
     ListBooksController,
-    ListLoansController
+    ListLoansController,
+    DeleteBookController
   ],
 })
 export class AppModule { }

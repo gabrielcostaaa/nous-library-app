@@ -46,7 +46,6 @@ const MOCK: Book[] = [
 ];
 
 export function BookCarousel() {
-  // em produção, troque MOCK pelo seu fetch via TanStack Query
   const items = useMemo(() => MOCK, []);
   const ref = useRef<HTMLDivElement>(null);
 

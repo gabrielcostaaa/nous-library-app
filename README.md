@@ -263,8 +263,24 @@ Se você fizer alterações no prisma/schema.prisma, precisará regenerar o clie
 ```bash
 yarn generate:api
 ```
+### 7. Popular o Banco com Dados de Teste
+Execute o seed para criar usuários padrão e livros brasileiros:
+```bash
+yarn seed:api
+```
+Este comando criará:
+- Usuário admin: admin@nous.com / Admin@123
+- Usuário comum: user@nous.com / User@123
+- 10 livros brasileiros famosos
 
-### 7. Rodando o Projeto Localmente
+## 8. Acessar o Prisma Studio (Interface do Banco)
+Para visualizar e gerenciar os dados do banco através de uma interface web:
+```bash
+yarn studio:api
+```
+Acesse: http://localhost:5555
+
+### 9. Rodando o Projeto Localmente
 Você pode iniciar os serviços de front-end e back-end juntos ou separadamente.
 
 #### Aplicação Completa (Front-end e API)
