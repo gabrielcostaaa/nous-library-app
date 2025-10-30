@@ -4,7 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { saveToken } from "@/shared/auth";
+import { saveSession } from "@/shared/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,6 +17,14 @@ const schema = z.object({
   password: z.string().min(6, { message: "A senha deve ter pelo menos 6 caracteres." }),
 });
 type FormData = z.infer<typeof schema>;
+
+type LoginSuccessResponse = {
+  access_token: string;
+  user: {
+    name: string;
+    role: "ADMIN" | "USER";
+  };
+};
 
 export default function LoginPage() {
   const [params] = useSearchParams();
@@ -53,10 +61,14 @@ export default function LoginPage() {
       isAdmin
         ? api.admin.login({ email: data.email, password: data.password })
         : api.user.login({ email: data.email, password: data.password }),
-    onSuccess: ({ access_token }: { access_token: string }) => {
-      saveToken(access_token);
+    onSuccess: (response: LoginSuccessResponse) => {
+      saveSession({
+        token: response.access_token,
+        name: response.user.name,
+        role: response.user.role,
+      });
       toast.success("Login realizado com sucesso!");
-      nav(ui.successRedirect);
+      nav("/app");
     },
     onError: (error) => {
       toast.error((error as Error).message || "E-mail ou senha inválidos.");
@@ -157,7 +169,11 @@ export default function LoginPage() {
                 )}
               </div>
 
-              <Button type="submit" className="w-full h-12 text-sm font-medium" disabled={isSubmitting || m.isPending}>
+              <Button
+                type="submit"
+                className="w-full h-12 text-sm font-medium"
+                disabled={isSubmitting || m.isPending}
+              >
                 {isSubmitting || m.isPending ? "Entrando..." : "Entrar"}
               </Button>
             </form>

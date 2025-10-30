@@ -1,9 +1,9 @@
-import { useTheme } from "@/shared/theme/ThemeProvider";
+// import { useTheme } from "@/shared/theme/ThemeProvider";
 import { Moon, Sun } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function Navbar() {
-  const { theme, toggle } = useTheme();
+  // const { theme, toggle } = useTheme();
 
   return (
     <header className="sticky top-0 z-50 border-b bg-card text-card-foreground/90">
@@ -20,14 +20,14 @@ export function Navbar() {
           {/* Login administrativo */}
           <Link to="/login?role=admin" className="text-sm hover:opacity-80">Painel Admin</Link>
 
-          <button
+          {/* <button
             onClick={toggle}
             className="rounded-lg border px-3 py-1 text-sm hover:bg-muted"
             aria-label="Alternar tema"
             title="Alternar tema"
           >
             {theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
-          </button>
+          </button> */}
         </div>
       </nav>
     </header>
