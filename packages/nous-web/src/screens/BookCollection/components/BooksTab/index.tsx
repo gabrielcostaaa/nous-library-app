@@ -321,6 +321,13 @@ export default function BooksTab() {
                     <div className="pointer-events-none absolute inset-0 rounded-xl opacity-0 transition group-hover:pointer-events-auto group-hover:opacity-100">
                       <div className="absolute right-2 top-2 flex gap-2">
                         <Button
+                          variant="default"
+                          className="h-8 px-2 text-sm hover:opacity-90"
+                          onClick={() => handleEdit(book)}
+                        >
+                          Emprestar
+                        </Button>
+                        <Button
                           size="icon"
                           variant="secondary"
                           className="h-8 w-8"
@@ -338,6 +345,7 @@ export default function BooksTab() {
                         </Button>
                       </div>
                     </div>
+
                   </div>
 
                   <div className="mt-3">

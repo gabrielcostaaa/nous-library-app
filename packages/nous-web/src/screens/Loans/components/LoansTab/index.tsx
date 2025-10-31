@@ -1,66 +1,53 @@
-// import { useState } from "react";
-// import { useMutation, useQuery } from "@tanstack/react-query";
-// import { Button } from "@/components/ui/button";
-// import { Input } from "@/components/ui/input";
-// import { Card } from "@/components/ui/card";
-// import { api } from "@/services";
+import { useQuery } from "@tanstack/react-query";
+import { api } from "@/services";
 
-// export default function LoansTab() {
-//   const [loanId, setLoanId] = useState<number | null>(null);
+import { AlertCircle, Loader2 } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { DataTable } from "@/components/DataTable";
+import { columns } from "../Columns";
 
-//   const m = useMutation({
-//     mutationFn: (p: { userId: number; bookId: number; days: number }) =>
-//       api.registerLoan(p),
-//     onSuccess: ({ id }) => setLoanId(id),
-//   });
+export default function LoansPage() {
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["loans"],
+    queryFn: api.loans.list,
+  });
 
-//   const fine = useQuery({
-//     queryKey: ["loan", loanId, "fine"],
-//     queryFn: () => api.loanFine(loanId!),
-//     enabled: loanId != null,
-//   });
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center gap-2 text-muted-foreground">
+        <Loader2 className="h-5 w-5 animate-spin" />
+        <span>Carregando empréstimos...</span>
+      </div>
+    );
+  }
 
-//   const rental = useQuery({
-//     queryKey: ["loan", loanId, "rental"],
-//     queryFn: () => api.loanRental(loanId!),
-//     enabled: loanId != null,
-//   });
+  if (isError) {
+    return (
+      <Alert variant="destructive">
+        <AlertCircle className="h-4 w-4" />
+        <AlertTitle>Erro ao carregar os dados</AlertTitle>
+        <AlertDescription>
+          Não foi possível buscar a lista de empréstimos. Tente novamente mais
+          tarde.
+          <p className="mt-2 text-xs opacity-80">
+            Detalhe: {(error as Error).message}
+          </p>
+        </AlertDescription>
+      </Alert>
+    );
+  }
 
-//   return (
-//     <Card className="p-4 space-y-3">
-//       <h2 className="font-medium">Registrar Empréstimo</h2>
-//       <form className="grid grid-cols-1 md:grid-cols-4 gap-2"
-//         onSubmit={(e) => {
-//           e.preventDefault();
-//           const fd = new FormData(e.currentTarget as HTMLFormElement);
-//           m.mutate({
-//             userId: Number(fd.get("userId")),
-//             bookId: Number(fd.get("bookId")),
-//             days: Number(fd.get("days")),
-//           });
-//         }}>
-//         <Input name="userId" placeholder="ID usuário" type="number" />
-//         <Input name="bookId" placeholder="ID livro" type="number" />
-//         <Input name="days" placeholder="Dias" type="number" />
-//         <Button type="submit" disabled={m.isPending}>Emprestar</Button>
-//       </form>
-
-//       {loanId && (
-//         <div className="text-sm">
-//           <p>Empréstimo #{loanId}</p>
-//           <p>Multa: {fine.isSuccess ? `R$ ${fine.data.fine.toFixed(2)}` : "-"}</p>
-//           <p>Aluguel: {rental.isSuccess ? `R$ ${rental.data.rental.toFixed(2)}` : "-"}</p>
-//         </div>
-//       )}
-//     </Card>
-//   );
-// }
-
-export default function LoansTab() {
   return (
-    <div className="p-4">
-      <h2 className="font-medium">Empréstimos</h2>
-      <p>Conteúdo dos empréstimos será implementado aqui.</p>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold tracking-tight">
+          Gerenciamento de Empréstimos
+        </h1>
+        <p className="text-muted-foreground">
+          Visualize e administre todos os empréstimos da biblioteca.
+        </p>
+      </div>
+      <DataTable columns={columns} data={data || []} />
     </div>
   );
 }
