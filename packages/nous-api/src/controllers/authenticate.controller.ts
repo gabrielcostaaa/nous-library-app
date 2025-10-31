@@ -68,6 +68,6 @@ export class AuthenticateController {
       role: user.role,
     });
 
-    return { access_token: accessToken };
+    return { access_token: accessToken, user: { id: user.id, name: user.name, email: user.email, role: user.role } };
   }
 }

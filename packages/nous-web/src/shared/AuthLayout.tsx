@@ -34,7 +34,11 @@ export default function AuthLayout() {
       <header className="border-b">
         <div className="mx-auto flex h-14 max-w-[1280px] items-center justify-between px-4">
           <div className="flex items-center gap-2">
-            <LibraryBig className="h-5 w-5 text-primary" />
+            <img
+              src={`${import.meta.env.BASE_URL}icon.png`}
+              alt="Nous Library"
+              className="h-10 w-10 rounded-2xl"
+            />
             <span className="font-semibold">Nous Library</span>
           </div>
           <div className="flex items-center gap-3">

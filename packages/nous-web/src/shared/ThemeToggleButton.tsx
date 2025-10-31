@@ -24,7 +24,6 @@ export function ThemeToggleButton() {
       title="Alternar tema"
     >
       {mode === "dark" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-      <span className="hidden sm:inline">{mode === "dark" ? "Escuro" : "Claro"}</span>
     </button>
   );
 }
