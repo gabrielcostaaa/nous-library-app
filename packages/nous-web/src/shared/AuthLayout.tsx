@@ -3,6 +3,7 @@ import { getSession } from "@/shared/auth";
 import type { Session } from "@/shared/auth";
 import { ThemeToggleButton } from "@/shared/ThemeToggleButton";
 import { Book, LibraryBig } from "lucide-react";
+import NavTitle from "@/components/NavTitle";
 
 const UserAvatar = ({ initial }: { initial: string }) => (
   <div className="grid h-8 w-8 place-items-center rounded-full bg-muted text-sm font-semibold">
@@ -33,14 +34,7 @@ export default function AuthLayout() {
     <div className="min-h-dvh bg-background text-foreground">
       <header className="border-b">
         <div className="mx-auto flex h-14 max-w-[1280px] items-center justify-between px-4">
-          <div className="flex items-center gap-2">
-            <img
-              src={`${import.meta.env.BASE_URL}icon.png`}
-              alt="Nous Library"
-              className="h-10 w-10 rounded-2xl"
-            />
-            <span className="font-semibold">Nous Library</span>
-          </div>
+          <NavTitle />
           <div className="flex items-center gap-3">
             <ThemeToggleButton />
             <div className="flex items-center gap-2 rounded-md border px-2 py-1">
