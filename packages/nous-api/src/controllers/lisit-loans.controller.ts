@@ -15,6 +15,22 @@ export class ListLoansController {
   @ApiOperation({ summary: "Listar todos os empréstimos" })
   @ApiResponse({ status: 200, description: "Lista de empréstimos retornada com sucesso." })
   async handle() {
-    return this.prisma.loan.findMany({ orderBy: { createdAt: "desc" } });
+    return this.prisma.loan.findMany({
+      orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        userId: true,
+        bookId: true,
+        loanDate: true,
+        dueDate: true,
+        returnDate: true,
+        status: true,
+        fineDiscountApplied: true,
+        createdAt: true,
+        updatedAt: true,
+        user: { select: { id: true, name: true } },
+        book: { select: { id: true, title: true } },
+      },
+    });
   }
 }

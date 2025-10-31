@@ -28,6 +28,8 @@ import {
 import { Pencil, Trash2, Plus, Search } from "lucide-react";
 import type { Book } from "@/services/models";
 import { api } from "@/services";
+import { LoanBookDialog } from "../LoanBookDialog";
+
 
 type BookFormData = {
   title: string;
@@ -44,6 +46,9 @@ export default function BooksTab() {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [editingBook, setEditingBook] = useState<Book | null>(null);
   const [deletingBookId, setDeletingBookId] = useState<string | null>(null);
+
+  const [isLoanDialogOpen, setIsLoanDialogOpen] = useState(false);
+  const [loanBook, setLoanBook] = useState<Book | null>(null);
 
   const { data: books, isLoading } = useQuery({
     queryKey: ["books"],
@@ -118,6 +123,11 @@ export default function BooksTab() {
     setValue("imageUrl", book.imageUrl || "");
     setValue("basePrice", book.basePrice);
     setValue("basePriceMasked", formatBRL(book.basePrice));
+  };
+
+  const handleOpenLoanDialog = (book: Book) => {
+    setLoanBook(book);
+    setIsLoanDialogOpen(true);
   };
 
   const onSubmitAdd = (data: BookFormData) => {
@@ -299,7 +309,6 @@ export default function BooksTab() {
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             {filtered.map((book) => {
-
               return (
                 <div key={book.id} className="group">
                   <div className="relative">
@@ -323,7 +332,7 @@ export default function BooksTab() {
                         <Button
                           variant="default"
                           className="h-8 px-2 text-sm hover:opacity-90"
-                          onClick={() => handleEdit(book)}
+                          onClick={() => handleOpenLoanDialog(book)}
                         >
                           Emprestar
                         </Button>
@@ -345,7 +354,6 @@ export default function BooksTab() {
                         </Button>
                       </div>
                     </div>
-
                   </div>
 
                   <div className="mt-3">
@@ -454,6 +462,15 @@ export default function BooksTab() {
           </form>
         </DialogContent>
       </Dialog>
+
+      <LoanBookDialog
+        book={loanBook}
+        isOpen={isLoanDialogOpen}
+        onOpenChange={(open: boolean) => {
+          setIsLoanDialogOpen(open);
+          if (!open) setLoanBook(null);
+        }}
+      />
 
       <AlertDialog
         open={!!deletingBookId}

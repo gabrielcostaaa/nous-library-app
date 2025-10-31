@@ -5,9 +5,10 @@ import { AlertCircle, Loader2 } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { DataTable } from "@/components/DataTable";
 import { columns } from "../Columns";
+import type { ListLoansResponse } from "@/services/LoansService/interface";
 
 export default function LoansPage() {
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError, error } = useQuery<ListLoansResponse>({
     queryKey: ["loans"],
     queryFn: api.loans.list,
   });

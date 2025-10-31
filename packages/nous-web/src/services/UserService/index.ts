@@ -32,6 +32,6 @@ export const UserService = {
    * Lista todas as contas de Usuário (público)
    * Rota: GET /nous-user-create-account
    */
-  listAccounts: () =>
+  list: () =>
     request<ListUsersResponse>("/nous-user-create-account"),
 };

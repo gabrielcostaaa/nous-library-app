@@ -1,6 +1,21 @@
-import type { Loan } from '../models';
+export type LoanStatus = "ACTIVE" | "OVERDUE" | "RETURNED";
 
-export type ListLoansResponse = Loan[];
+export interface ListLoansItem {
+  id: string;
+  userId: string;
+  bookId: string;
+  loanDate: string;
+  dueDate: string;
+  returnDate?: string | null;
+  status: LoanStatus;
+  fineDiscountApplied: boolean;
+  createdAt: string;
+  updatedAt: string;
+  user: { id: string; name: string };
+  book: { id: string; title: string };
+}
+
+export type ListLoansResponse = ListLoansItem[];
 
 export interface RegisterLoanBody {
   userId: string;
@@ -8,4 +23,4 @@ export interface RegisterLoanBody {
   dueDate: string;
 }
 
-export type RegisterLoanResponse = Loan;
+export type RegisterLoanResponse = ListLoansItem;
